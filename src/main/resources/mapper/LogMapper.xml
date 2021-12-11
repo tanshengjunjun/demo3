@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.LogMapper" >
+
+    <select id="getName" resultType="java.lang.String" >
+        select name from emp
+    </select>
+
+    <insert id="insertNames">
+        insert into emp values (4,"上官婉儿",26)
+    </insert>
+</mapper>
