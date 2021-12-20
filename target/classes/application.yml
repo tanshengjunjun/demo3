@@ -6,7 +6,7 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: dev,redis
   datasource:
     #1.JDBC
     type: com.alibaba.druid.pool.DruidDataSource
