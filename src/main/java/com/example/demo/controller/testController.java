@@ -2,6 +2,7 @@ package com.example.demo.controller;
 import com.example.demo.service.ILogService;
 import com.example.demo.service.impl.LogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,8 @@ public class testController {
 
     @Autowired
     ILogService logService;
+
+//    @PostMapping
     @RequestMapping("/")
     public String index() {
         return "Hello springboot!";
