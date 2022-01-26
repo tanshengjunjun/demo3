@@ -105,4 +105,24 @@ public class RedisTests {
         // 删除所有A元素
         stringRedisTemplate.opsForList().remove("myList", 0, "A");
     }
+
+    @Test
+    public void testRedis(){
+        int i = 0;
+        try {
+            long startTime = System.currentTimeMillis();
+            while(true){
+                long endTime = System.currentTimeMillis();
+                if(endTime - startTime >= 3000){
+                    break;
+                }
+                redisTemplate.opsForValue().set("test"+i,i+"");
+                i++;
+            }
+        }finally {
+            log.info("redis 每秒操作"+i+"次");
+            System.out.println("redis 每秒操作"+i+"次");
+        }
+    }
+
 }
