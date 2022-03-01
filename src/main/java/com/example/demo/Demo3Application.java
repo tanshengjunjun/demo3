@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @MapperScan("com.example.demo.mapper")
 @SpringBootApplication
+//@EnableEurekaServer
 public class Demo3Application {
 
     public static void main(String[] args) {

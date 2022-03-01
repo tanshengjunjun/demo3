@@ -34,6 +34,11 @@ public class RedisTests {
     @Autowired
     StringRedisTemplate stringRedisTemplate;
 
+
+    @Test
+    public void test1(){
+        System.out.println(1);
+    }
     @Test
     public void test() throws Exception {
 
