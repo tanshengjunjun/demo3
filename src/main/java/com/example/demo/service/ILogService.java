@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Name;
+
 import java.util.List;
 
 public interface ILogService {
-    List<String> getName();
+    List<Name> getName();
     void insertNames();
 }

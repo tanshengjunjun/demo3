@@ -5,8 +5,10 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: demo
   profiles:
-    active: dev,redis
+    active: dev,redis,mongodb
   datasource:
     #1.JDBC
     type: com.alibaba.druid.pool.DruidDataSource
@@ -62,3 +64,8 @@ mybatis:
 # spring:
 #   profiles:
 #     active: dev
+logging:
+  level:
+    com.example.demo.mapper: debug
+  file:
+    name: logs/demo-logging.log

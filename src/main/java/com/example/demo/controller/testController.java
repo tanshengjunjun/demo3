@@ -1,15 +1,20 @@
 package com.example.demo.controller;
+import com.alibaba.excel.EasyExcel;
+import com.example.demo.entity.Name;
 import com.example.demo.service.ILogService;
-import com.example.demo.service.impl.LogServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Api(tags = "测试框架")
@@ -27,13 +32,13 @@ public class testController {
 
     @ApiOperation("获取名字列表")
     @GetMapping("/getName")
-    public List<String> getName() {
+    public List<Name> getName() {
         System.out.println("getName");
-        List<String> result = logService.getName();
-        for (String s:
-                result) {
-            System.out.println(s);
-        }
+        List<Name> result = logService.getName();
+//        for (String s:
+//                result) {
+//            System.out.println(s);
+//        }
         System.out.println(logService.getName().get(0));
         return logService.getName();
     }
@@ -46,4 +51,40 @@ public class testController {
         return "post Name 后裔" +
                 "!";
     }
+
+    @RequestMapping("excelDownload")
+    public void excelDownload(HttpServletResponse response) throws IOException {
+        List<Name> nameList = this.getName();
+        this.excelDownload(nameList,Name.class,response);
+    }
+    public <T>  void excelDownload(List<T> list, Class<T> clazz, HttpServletResponse response) throws IOException {
+        // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        String sDate = df.format(new Date());
+
+        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        String fileName = URLEncoder.encode("数据导出"+sDate, "UTF-8");
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+//		EasyExcel.write(response.getOutputStream(), clazz).sheet("sheet1").doWrite(list);
+        EasyExcel.write("d:\\1123.xlsx", clazz).sheet("sheet1").doWrite(list);
+    }
+
+    /**
+     * MongoDB存储json格式数据
+     *
+     * json数据可以是JSONObject，也可以是JSONArray
+     *
+     * @param jsonObject
+     * @return
+     */
+    @Autowired
+    private MongoTemplate mongoTemplate;
+    @PostMapping("/mongoAddJsonData")
+    public void mongoAddJsonData(@RequestBody JSONObject jsonObject){
+        this.mongoTemplate.insert(jsonObject, "mongo_json_test");
+    }
+
 }

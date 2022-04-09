@@ -3,8 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.mapper.LogMapper" >
 
-    <select id="getName" resultType="java.lang.String" >
-        select name from emp
+    <select id="getName" resultType="com.example.demo.entity.Name" >
+        select * from emp
     </select>
 
     <insert id="insertNames">
