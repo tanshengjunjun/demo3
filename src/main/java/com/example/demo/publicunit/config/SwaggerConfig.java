@@ -1,5 +1,7 @@
 package com.example.demo.publicunit.config;
 
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,5 +32,10 @@ public class SwaggerConfig {
                 .contact(new Contact("Swagger", "http://swagger.io", "swagger@hs.com"))
                 .version("1.0")
                 .build();
+    }
+    //2022-4-9实现mybatis-plus的分页必备
+    @Bean
+    public PaginationInterceptor paginationInterceptor(){
+        return new PaginationInterceptor();
     }
 }

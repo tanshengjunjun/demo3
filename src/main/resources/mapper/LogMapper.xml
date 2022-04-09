@@ -10,4 +10,8 @@
     <insert id="insertNames">
         insert into emp values (4,"上官婉儿",26)
     </insert>
+
+    <select id="getPageName" parameterType="com.example.demo.entity.Name" resultType="com.example.demo.entity.Name" >
+        select * from emp
+    </select>
 </mapper>

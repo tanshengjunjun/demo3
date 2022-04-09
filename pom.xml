@@ -120,7 +120,13 @@
             <classifier>jdk15</classifier>
         </dependency>
         <!--        jsonObject依赖-->
-
+<!--IPage-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+<!--IPage-->
     </dependencies>
 
     <build>

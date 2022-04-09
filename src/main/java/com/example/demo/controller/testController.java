@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 import com.alibaba.excel.EasyExcel;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.entity.Name;
+import com.example.demo.mapper.LogMapper;
 import com.example.demo.service.ILogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -87,4 +90,14 @@ public class testController {
         this.mongoTemplate.insert(jsonObject, "mongo_json_test");
     }
 
+    @Autowired
+    LogMapper logMapper;
+    @PostMapping("/pageTest")
+    public IPage<Name> pageTest(){
+        Integer currentPage = 1; //当前页数：显示第一页数据
+        Integer pageSize = 2;    //每页显示多少：每页显示2条数据
+        Page<Name> page = new Page<Name>(currentPage, pageSize);
+        IPage<Name> resultList = logMapper.getPageName(page,null);
+       return resultList;
+    }
 }
