@@ -15,5 +15,5 @@ public interface LogMapper {
 
     void insertNames();
 
-    IPage<Name> getPageName(Page<Name> page, QueryWrapper<List<Name>> wrapper);
+    IPage<Name> getPageName(Page<Name> page);
 }

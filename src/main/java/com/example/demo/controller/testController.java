@@ -97,7 +97,7 @@ public class testController {
         Integer currentPage = 1; //当前页数：显示第一页数据
         Integer pageSize = 2;    //每页显示多少：每页显示2条数据
         Page<Name> page = new Page<Name>(currentPage, pageSize);
-        IPage<Name> resultList = logMapper.getPageName(page,null);
+        IPage<Name> resultList = logMapper.getPageName(page);
        return resultList;
     }
 }

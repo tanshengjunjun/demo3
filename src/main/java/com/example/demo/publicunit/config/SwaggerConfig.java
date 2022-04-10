@@ -1,5 +1,7 @@
 package com.example.demo.publicunit.config;
 
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import io.swagger.annotations.ApiOperation;
@@ -34,8 +36,14 @@ public class SwaggerConfig {
                 .build();
     }
     //2022-4-9实现mybatis-plus的分页必备
+//    @Bean
+//    public PaginationInterceptor paginationInterceptor(){
+//        return new PaginationInterceptor();
+//    }
     @Bean
-    public PaginationInterceptor paginationInterceptor(){
-        return new PaginationInterceptor();
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+        return interceptor;
     }
 }
