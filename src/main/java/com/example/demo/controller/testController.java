@@ -5,12 +5,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.entity.Name;
 import com.example.demo.mapper.LogMapper;
 import com.example.demo.service.ILogService;
+import com.example.demo.utils.FileUploadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -99,5 +101,11 @@ public class testController {
         Page<Name> page = new Page<Name>(currentPage, pageSize);
         IPage<Name> resultList = logMapper.getPageName(page);
        return resultList;
+    }
+    @Autowired
+    private FileUploadService fileUploadService;
+    @PostMapping("/uploadTest")
+    public void uploadTest(@RequestParam("file1")MultipartFile file) throws IOException {
+        fileUploadService.upload(file);
     }
 }

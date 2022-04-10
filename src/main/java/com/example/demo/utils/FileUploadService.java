@@ -19,7 +19,8 @@ import java.util.List;
 public class FileUploadService {
 
 	// 配置文件中指定的文件存放路径
-	@Value("${file.upload.path}")
+//	@Value("${file.upload.path}")
+	@Value("D:\\")
 	private String fileUploadPath;
 
 	// 旧项目固定的路径
